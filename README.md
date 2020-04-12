@@ -1,6 +1,6 @@
 # persist4browser
 
-persist4browser is a library that helps you with saving and reading your state in browser, into localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React.
+persist4browser is a library that helps you with saving and reading your state in browser, by using localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React.
 
 ## Installation
 
@@ -37,13 +37,11 @@ console.log(username) // "Tom"
 
 ## API
 
-```
-persist4browser(options)
-```
+### ```persist4browser(options)```
 
 **options** is an object that you may pass to the constructor for advanced configuration on the instance. This could be useful when you want to create more that 1 persistence instance on the same domain address.
 
-* `prefix` : an optional `String` that will appear as the beginning part of a unique key that will be used to save in localStorage. Having a `prefix` has 2 benefits: It will be easy for you to look up your saved state in localStorage of the browser since the key will start with your `prefix`. Secondly, you will be able to create multiple states in localStorage that are different from each other and they will not collide. See the example below:
+* `prefix` : an optional `String` that will appear as the beginning part of a unique key that will be used to save state in localStorage. Having a `prefix` has 2 benefits: It will be easy for you to look up your saved state in localStorage of the browser since the key will start with your `prefix`. Secondly, you will be able to create multiple states in localStorage that are different from each other and they will not collide. See the example below:
 
 ```
 const users = require("persist4browser")({ prefix: "users" })
@@ -57,7 +55,7 @@ products.read().name // "laptop"
 
 ```
 
-* `expire` : an optional `String` that will tell localStorage for how long to keep the state saved. If you want it to be saved for 2 minutes only, you pass `2m`, if you want it to stay for 3 days, you pass `3d`. 
+* `expire` : an optional `String` that will tell localStorage for how long to keep the state saved. If you want it to be saved for 2 minutes only, you pass `"2m"`, if you want it to stay for 3 days, you pass `"3d"`. 
 If you do not specify `expire` option, the localSession will be used to store your state. Therefore once the user closes the page on the browser, the saved state will be lost.
 
 ```
@@ -88,16 +86,15 @@ users.read().age // undefined
 ```
 
 
-```
-persist4browser().save(state)
-```
+
+### ```persist4browser().save(state)```
 
 * `state` is an object that you want to save to localStorage. It is mandatory.
 
 
-```
-persist4browser().read(initialState)
-```
+
+### ```persist4browser().read(initialState)```
+
 * `initialState` is an object that you can optionally supply to the `read` method. When this method finds the saved state from localStorage, it will merge it with `initialState`. The values that are saved in localStorage will overwrite the `initialState` if they share the same key name.
 This is useful when in an app, you call the `read` method before calling the `save` method.
 
