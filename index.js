@@ -126,5 +126,5 @@
 	}
 
 	window.persist4browser = persist4browser
-	return persist4browser
+	return window.persist4browser
 })(window, document)
