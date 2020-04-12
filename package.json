@@ -1,0 +1,22 @@
+{
+  "name": "persist4browser",
+  "version": "1.0.0",
+  "description": "persist4browser is a library that helps you with saving and reading your state in browser, into localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/seven-deuce/persist4browser.git"
+  },
+  "keywords": [
+    "localStorage"
+  ],
+  "author": "seven-deuce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seven-deuce/persist4browser/issues"
+  },
+  "homepage": "https://github.com/seven-deuce/persist4browser#readme"
+}
