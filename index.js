@@ -7,7 +7,7 @@
 	var fields, expire, prefix, key
 
 	function generateKey(prefix = "") {
-		const origin = window.location.origin
+		const origin = window.location.href
 		const keyChars = origin.split("").filter((item) => /[A-Za-z\d]/.test(item))
 		const part1 = keyChars.filter((item, i) => i % 2 === 0).join("")
 		const part2 = keyChars.filter((item, i) => i % 3 === 0).join("")
