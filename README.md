@@ -111,3 +111,6 @@ users.read({name: "Tom"}).name // "Jack"
 
 
 ```
+
+## Integration with React.js
+See this repo as a sample of how to inegrate it with React: https://github.com/seven-deuce/no-redux-app-with-persistence 
