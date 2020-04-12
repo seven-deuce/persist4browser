@@ -86,13 +86,14 @@ users.read().age // undefined
 ```
 
 
-#
+<br />
+
 ### ```persist4browser().save(state)```
 
 * `state` is an object that you want to save to localStorage. It is mandatory.
 
+<br />
 
-#
 ### ```persist4browser().read(initialState)```
 
 * `initialState` is an object that you can optionally supply to the `read` method. When this method finds the saved state from localStorage, it will merge it with `initialState`. The values that are saved in localStorage will overwrite the `initialState` if they share the same key name.
