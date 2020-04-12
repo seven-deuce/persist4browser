@@ -10,7 +10,7 @@ $ npm install persist4browser
 
 ### Browser
 ``` 
-`<script src="https://unpkg.com/persist4browser@latest/umd/persist4browser.js"></script>`
+<script src="https://unpkg.com/persist4browser@latest/umd/persist4browser.js"></script>
 ``` 
 
 ## Basic usage 
