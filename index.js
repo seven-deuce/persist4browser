@@ -19,11 +19,11 @@ function expireDate(string) {
 	// string could be like "1d" >> keep in local storage for 1 day
 	// or  like "5m" >> keep in local storage for 5 minutes
 	string = string.toLowerCase().trim()
-	if (/\dd/gi.test(string)) {
-		const numberOfDays = Number(string.match(/\d/)[0])
+	if (/\d+d/gi.test(string)) {
+		const numberOfDays = Number(string.match(/\d+/)[0])
 		return numberOfDays * 1000 * 60 * 60 * 24 + Date.now()
-	} else if (/\dm/gi.test(string)) {
-		const numberOfDays = Number(string.match(/\d/)[0])
+	} else if (/\d+m/gi.test(string)) {
+		const numberOfDays = Number(string.match(/\d+/)[0])
 		return numberOfDays * 1000 * 60 + Date.now()
 	} else return ""
 }
