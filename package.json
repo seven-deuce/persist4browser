@@ -1,6 +1,6 @@
 {
   "name": "persist4browser",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "persist4browser is a library that helps you with saving and reading your state in browser, into localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React.",
   "main": "index.js",
   "files": [
