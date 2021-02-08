@@ -1,6 +1,6 @@
 # persist4browser
 
-persist4browser is a library that helps you with saving and reading your state in browser, by using localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React.
+persist4browser is a library that helps you with saving and reading your state in browser, by using localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React. It will work with Next.js out-of-the-box.
 
 ## Installation
 
