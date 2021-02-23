@@ -85,6 +85,12 @@ users.read().age // undefined
 
 ```
 
+* `encrypt` : You can use this option to encrypt the state which will be saved to localStorage, thus, it will not be easy for others to inspect and see it, however it is not absolutely impossible to decipher it, since everything in the front end is exposed. You can pass `true`, or a `String` , with minimum 10 characters, which will be used for encoding the localStorage item. Nothing else will be changed in the behavior of the library.  
+
+```
+const users = require("persist4browser")({ encrypt: true })
+
+```
 
 <br />
 
