@@ -1,6 +1,7 @@
+const { EncryptStorage } = require("encrypt-storage")
 
 //creating internal variables with closure
-var fields, expire, prefix, key, localStorage, sessionStorage, location
+var fields, expire, prefix, key, localStorage, sessionStorage, location, encrypt, encryptStorage
 function isServer() {
     let server = false
     try {
@@ -15,7 +16,7 @@ class fakeStorage {
     constructor() {
         this.obj = {}
     }
-    setItem(a,b) {
+    setItem(a, b) {
         this.obj[a] = b
         return this.obj
     }
@@ -23,18 +24,14 @@ class fakeStorage {
         return this.obj[a] || null
     }
 }
-location = isServer() ? {origin: "temp"} : window.location
-localStorage = isServer() ? new fakeStorage() : window.localStorage
-sessionStorage = isServer() ? new fakeStorage() : window.sessionStorage
-
 function generateKey(prefix = "") {
     const origin = location.origin
     const keyChars = origin.split("").filter((item) => /[A-Za-z\d]/.test(item))
     const part1 = keyChars.filter((item, i) => i % 2 === 0).join("")
     const part2 = keyChars.filter((item, i) => i % 3 === 0).join("")
-    const key = prefix + part1 + part2
+    const key = prefix + "_" + part1 + part2
 
-    return key
+    return key.length > 10 ? key : `${key}_persist4browser`
 }
 
 function expireDate(string) {
@@ -54,15 +51,10 @@ function isObject(state, name) {
     if (state === null || state === undefined) {
         console.warn(`${name} cannot be null or undefined!`)
         return false
-    } else if (
-        typeof state !== "object" ||
-        state instanceof Set ||
-        state instanceof Map ||
-        state instanceof Array
-    ) {
+    } else if (typeof state !== "object" || state instanceof Set || state instanceof Map || state instanceof Array) {
         console.warn(`${name} must be an object!`)
         return false
-    }  else return true
+    } else return true
 }
 
 function persistState(state) {
@@ -119,7 +111,7 @@ function readState(initialState = {}) {
         }
     }
 
-    storage = JSON.parse(storage)
+    storage = typeof storage === "string" ? JSON.parse(storage) : storage
 
     if (storage === null || storage === undefined) return { ...initialState }
     else if (!storage.expire) {
@@ -137,12 +129,28 @@ const f = {
 }
 
 function persist4browser(options = {}) {
+    location = isServer() ? { origin: "temp" } : window.location
     fields = options.fields || ["*"]
     expire = options.expire || ""
     prefix = options.prefix || ""
     key = generateKey(prefix)
+    encrypt = options.encrypt
+    if (!options.encrypt) {
+        encrypt = null
+        localStorage = isServer() ? new fakeStorage() : window.localStorage
+        sessionStorage = isServer() ? new fakeStorage() : window.sessionStorage
+    } else if (typeof encrypt === "string") {
+        encryptStorage = EncryptStorage(encrypt, { storageType: expire ? "localStorage" : "sessionStorage" })
+        localStorage = isServer() ? new fakeStorage() : encryptStorage
+        sessionStorage = isServer() ? new fakeStorage() : encryptStorage
+    } else if (encrypt === true) {
+        encryptStorage = EncryptStorage(key, { storageType: expire ? "localStorage" : "sessionStorage" })
+        localStorage = isServer() ? new fakeStorage() : encryptStorage
+        sessionStorage = isServer() ? new fakeStorage() : encryptStorage
+    }
+
     return f
 }
 
-if(!isServer()) window.persist4browser = persist4browser
+if (!isServer()) window.persist4browser = persist4browser
 module.exports = persist4browser

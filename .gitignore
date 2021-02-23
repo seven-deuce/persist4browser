@@ -1,2 +1,5 @@
 /test.html
 /umd
+/dist
+/node_modules
+/webpack.config.js
