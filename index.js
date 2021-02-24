@@ -1,5 +1,3 @@
-const { EncryptStorage } = require("encrypt-storage")
-
 //creating internal variables with closure
 var fields, expire, prefix, key, localStorage, sessionStorage, location, encrypt, encryptStorage
 function isServer() {
@@ -111,7 +109,13 @@ function readState(initialState = {}) {
         }
     }
 
-    storage = typeof storage === "string" ? JSON.parse(storage) : storage
+  try {
+            storage = typeof storage === "string" ? JSON.parse(storage) : storage
+        } catch (e) {
+            storage = initialState
+        }
+
+ 
 
     if (storage === null || storage === undefined) return { ...initialState }
     else if (!storage.expire) {
@@ -129,13 +133,15 @@ const f = {
 }
 
 function persist4browser(options = {}) {
+  if(isServer()) return {read: (initialState = {}) => initialState , save: ()=> ({})}
+    const { EncryptStorage } = require("encrypt-storage")
     location = isServer() ? { origin: "temp" } : window.location
     fields = options.fields || ["*"]
     expire = options.expire || ""
     prefix = options.prefix || ""
     key = generateKey(prefix)
     encrypt = options.encrypt
-    if (!options.encrypt) {
+    if (!options.encrypt ) {
         encrypt = null
         localStorage = isServer() ? new fakeStorage() : window.localStorage
         sessionStorage = isServer() ? new fakeStorage() : window.sessionStorage
