@@ -1,5 +1,5 @@
 /test.html
 /umd
-/dist
+# /dist
 /node_modules
 /webpack.config.js
