@@ -1,11 +1,12 @@
 {
   "name": "persist4browser",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "persist4browser is a library that helps you with saving and reading your state in browser, into localStorage. So if the page is refreshed, you still can persist your state. It could be used on its own or inside SPA frameworks like React and Next.js. Typescript definitions are included in the package.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "./dist/bundle.js",
+  "types": "./index.d.ts",
   "files": [
-    "umd"
+    "umd",
+    "index.d.ts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

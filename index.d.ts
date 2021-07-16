@@ -1,4 +1,4 @@
-export = persist4browser;
+
 declare function persist4browser(options?: Partial<OptionType>): {
     save: typeof persistState;
     read: typeof readState;
